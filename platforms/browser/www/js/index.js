@@ -68,10 +68,13 @@ var app = {
 
             var postext = document.getElementById('postext');
 
-            var date = new Date(position.timestamp*1000);
-            var hours = date.getHours();
-            var minutes = "0" + date.getMinutes();
-            var seconds = "0" + date.getSeconds();
+            var date = new Date((978307200 + position.timestamp)*1000);
+            var date2 = new Date(position.timestamp);
+
+
+            var hours = date2.getHours();
+            var minutes = "0" + date2.getMinutes();
+            var seconds = "0" + date2.getSeconds();
 
             // Will display time in 10:30:23 format
             var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
