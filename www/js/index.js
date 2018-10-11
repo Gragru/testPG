@@ -45,5 +45,31 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+
+
+        // ### My code ###
+
+        var options = {maximumAge: 3000, timeout: 5000,  enableHighAccuracy: true };
+        
+        navigator.geolocation.watchPosition(onSuccess, onError, options);
+
+        function onSuccess(position) {
+
+            var postext = document.getElementById('postext');
+            postext.innerText = position.coords.latitude + " " + position.coords.longitude;
+            console.log('Coordinates: ' + position.coords.latitude);
+            console.log('Timestamp: ' + position.timestamp);
+        
+        }
+        function onError(error) {
+            console.log('message: ' + error.message);
+            console.log ('code: ' + error.code);
+        
+        }
+
+
+        
+
+
     }
 };
