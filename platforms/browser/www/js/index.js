@@ -55,16 +55,61 @@ var app = {
 
         function onSuccess(position) {
 
-            var postext = document.getElementById('postext');
-            postext.innerText = position.coords.latitude + " " + position.coords.longitude;
+
             console.log('Coordinates: ' + position.coords.latitude);
             console.log('Timestamp: ' + position.timestamp);
+
+            var lat1 = position.coords.latitude;
+            var lon1 = position.coords.longitude;
+            var lat2 = 59.322881;
+            var lon2 = 17.990198;
+
+           var dist = distance(lat1, lon1, lat2, lon2, "M");
+
+            var postext = document.getElementById('postext');
+
+            var date = new Date(position.timestamp*1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+
+            // Will display time in 10:30:23 format
+            var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+
+
+            postext.innerText = position.coords.latitude + " - " + position.coords.longitude +" - "+ formattedTime + " - " + dist + " meters" ;
+
+
+
         
         }
         function onError(error) {
             console.log('message: ' + error.message);
             console.log ('code: ' + error.code);
         
+        }
+
+
+
+
+        function distance(lat1, lon1, lat2, lon2, unit) {
+            var radlat1 = Math.PI * lat1/180
+            var radlat2 = Math.PI * lat2/180
+            var theta = lon1-lon2
+            var radtheta = Math.PI * theta/180
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist)
+            dist = dist * 180/Math.PI
+            dist = dist * 60 * 1.1515
+            if (unit=="K") { dist = Math.round(dist * 1.609344 * 100)/100; }
+            if (unit=="N") { dist = dist * 0.8684 }
+            if (unit=="M") { dist = Math.round(dist * 1609.344); }
+            
+            return dist
         }
 
 
