@@ -59,29 +59,47 @@ var app = {
             console.log('Coordinates: ' + position.coords.latitude);
             console.log('Timestamp: ' + position.timestamp);
 
-            var lat1 = position.coords.latitude;
-            var lon1 = position.coords.longitude;
-            var lat2 = 59.322881;
-            var lon2 = 17.990198;
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
 
-           var dist = distance(lat1, lon1, lat2, lon2, "M");
+            var lat1 = 59.322601323663186;
+            var lon1 = 17.990458189619122;
+
+            var lat2 = 59.324022;
+            var lon2 = 17.996582;
+
+            var lat3 = 59.309918;
+            var lon3 = 18.021902;
+
+            var lat4 = 59.321466;
+            var lon4 = 17.989168;
+
+            var lat5 = 59.408742;
+            var lon5 = 17.733135;
+
+            var dist1 = distance(lat, lon, lat1, lon1, "M");
+            var dist2 = distance(lat, lon, lat2, lon2, "M");
+            var dist3 = distance(lat, lon, lat3, lon3, "M");
+            var dist4 = distance(lat, lon, lat4, lon4, "M");
+            var dist5 = distance(lat, lon, lat5, lon5, "M");
 
             var postext = document.getElementById('postext');
 
-            var date = new Date((978307200 + position.timestamp)*1000);
-            var date2 = new Date(position.timestamp);
 
-
-            var hours = date2.getHours();
-            var minutes = "0" + date2.getMinutes();
-            var seconds = "0" + date2.getSeconds();
-
-            // Will display time in 10:30:23 format
+            var date = new Date(position.timestamp);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
             var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
 
 
-            postext.innerText = position.coords.latitude + " - " + position.coords.longitude +" - "+ formattedTime + " - " + dist + " meters" ;
+            postext.innerHTML = position.coords.latitude + " - " + position.coords.longitude +" - "+ formattedTime + "<br/>" + 
+            " <br/> Hemma: " + dist1 + " m" +
+            " <br/> Båtklubben: " + dist2 + " m" +
+            " <br/> Jobbet: " + dist3 + " m" +
+            " <br/> Woken: " + dist4 + " m" +
+            " <br/> Älghorn: " + dist5 + " m";
 
 
 
