@@ -62,6 +62,20 @@ var app = {
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
 
+            var positions = new Array(7);
+            positions[0] = ["Hemma", 59.322601323663186, 17.990458189619122];
+            positions[1] = ["Båtklubben", 59.324022, 17.996582];
+            positions[2] = ["Jobbet", 59.309918, 18.021902];
+            positions[3] = ["Woken", 59.321466, 17.989168];
+            positions[4] = ["Älghorn", 59.408742, 17.733135];
+
+            positions[5] = ["Ingela", 59.322601323663186, 17.990458189619122];
+            positions[6] = ["Bilen", 59.322601323663186, 17.990458189619122];
+
+
+
+
+
             var lat1 = 59.322601323663186;
             var lon1 = 17.990458189619122;
 
@@ -84,7 +98,7 @@ var app = {
             var dist5 = distance(lat, lon, lat5, lon5, "M");
 
             var postext = document.getElementById('postext');
-
+            var posdata = document.getElementById('posdata');
 
             var date = new Date(position.timestamp);
             var hours = date.getHours();
@@ -92,14 +106,39 @@ var app = {
             var seconds = "0" + date.getSeconds();
             var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
+            posdata.innerHTML = "<tr><th>Place</th><th>Distance</th></tr>";
+            // for each outer array row
+            for (var i = 0 ; i < positions.length; i++) 
+            {
+                var tr = document.createElement("tr");
+
+                var td = document.createElement("td");
+                var txt = document.createTextNode(positions[i][0]);
+                td.appendChild(txt);
+                tr.appendChild(td);
+
+                var td = document.createElement("td");
+                var txt = document.createTextNode(distance(lat, lon, positions[i][1], positions[i][2], "M"));
+                td.appendChild(txt);
+                tr.appendChild(td);
+                posdata.appendChild(tr);
+            }
+
+            
 
 
-            postext.innerHTML = position.coords.latitude + " - " + position.coords.longitude +" - "+ formattedTime + "<br/>" + 
-            " <br/> Hemma: " + dist1 + " m" +
-            " <br/> Båtklubben: " + dist2 + " m" +
-            " <br/> Jobbet: " + dist3 + " m" +
-            " <br/> Woken: " + dist4 + " m" +
-            " <br/> Älghorn: " + dist5 + " m";
+
+
+
+
+
+            
+            // postext.innerHTML = position.coords.latitude + " - " + position.coords.longitude +" - "+ formattedTime + "<br/>" + 
+            // " <br/> Hemma: " + dist1 + " m" +
+            // " <br/> Båtklubben: " + dist2 + " m" +
+            // " <br/> Jobbet: " + dist3 + " m" +
+            // " <br/> Woken: " + dist4 + " m" +
+            // " <br/> Älghorn: " + dist5 + " m";
 
 
 
