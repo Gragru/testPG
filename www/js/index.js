@@ -72,32 +72,6 @@ var app = {
             positions[5] = ["Ingela", 59.322601323663186, 17.990458189619122];
             positions[6] = ["Bilen", 59.322601323663186, 17.990458189619122];
 
-
-
-
-
-            var lat1 = 59.322601323663186;
-            var lon1 = 17.990458189619122;
-
-            var lat2 = 59.324022;
-            var lon2 = 17.996582;
-
-            var lat3 = 59.309918;
-            var lon3 = 18.021902;
-
-            var lat4 = 59.321466;
-            var lon4 = 17.989168;
-
-            var lat5 = 59.408742;
-            var lon5 = 17.733135;
-
-            var dist1 = distance(lat, lon, lat1, lon1, "M");
-            var dist2 = distance(lat, lon, lat2, lon2, "M");
-            var dist3 = distance(lat, lon, lat3, lon3, "M");
-            var dist4 = distance(lat, lon, lat4, lon4, "M");
-            var dist5 = distance(lat, lon, lat5, lon5, "M");
-
-            var postext = document.getElementById('postext');
             var posdata = document.getElementById('posdata');
 
             var date = new Date(position.timestamp);
@@ -118,29 +92,14 @@ var app = {
                 tr.appendChild(td);
 
                 var td = document.createElement("td");
-                var txt = document.createTextNode(distance(lat, lon, positions[i][1], positions[i][2], "M"));
+                td.setAttribute("class", "lefttd");
+                var txt = document.createTextNode(distance(lat, lon, positions[i][1], positions[i][2], "M") + " m");
                 td.appendChild(txt);
                 tr.appendChild(td);
                 posdata.appendChild(tr);
             }
 
             
-
-
-
-
-
-
-
-            
-            // postext.innerHTML = position.coords.latitude + " - " + position.coords.longitude +" - "+ formattedTime + "<br/>" + 
-            // " <br/> Hemma: " + dist1 + " m" +
-            // " <br/> Båtklubben: " + dist2 + " m" +
-            // " <br/> Jobbet: " + dist3 + " m" +
-            // " <br/> Woken: " + dist4 + " m" +
-            // " <br/> Älghorn: " + dist5 + " m";
-
-
 
         
         }
